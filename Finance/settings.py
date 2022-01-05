@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from collections import defaultdict
 from pathlib import Path
 import os
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -134,12 +136,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # stripe api key
-STRIPE_KEY = "	sk_test_51KEWiESFlzmNea177jtkKWX3tTl1gRte1wWWotbqJ3ypKHyEmNiGeRDROSwrgLgFbnwSGVLrz5OD75LxRrT2PEPw00XE5g874d"
+STRIPE_KEY = config('STRIPE_KEY', default="")
 
 # email setup
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 't459633@gmail.com'
-EMAIL_HOST_PASSWORD = 'rhqwoomsjxoxevet'
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default='')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

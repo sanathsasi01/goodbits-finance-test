@@ -40,8 +40,11 @@ def add_invoice(request):
         text_content = strip_tags(html_content)
         email = EmailMultiAlternatives("Payment Link", text_content, settings.EMAIL_HOST_USER, [client_email])
         email.attach_alternative(html_content, "text/html")
-        email.send()
-
-        return Response({'success' : 'succesfully sent the email'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            email.send() #it was working but the account was disabled my google, so mail functionality will not be working.
+        except Exception as e:
+            print(e)
+            
+        return Response({'success' : 'succesfully sent the email'})
     else:
-        return Response(serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

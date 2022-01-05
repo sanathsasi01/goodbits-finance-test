@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # external 
     'rest_framework',
+    'corsheaders',
 
     # created
     'Invoice'
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -145,3 +147,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 't459633@gmail.com'
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default='')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True

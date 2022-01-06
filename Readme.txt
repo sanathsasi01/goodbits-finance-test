@@ -20,8 +20,8 @@ Working
  2. Alphanumeric check is done on invoice number
 
 
----------Front end source code is included as a zip file--------------
-node version - v16.13.1
+---------Front end source code--------------
+github repo - https://github.com/sanathsasi01/goodbits_frontend.git
 
  Postman documentation
  published link - https://documenter.getpostman.com/view/15623430/UVXbvLT1

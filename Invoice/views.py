@@ -23,12 +23,12 @@ def add_invoice(request):
 
     # validation the serializer and save
     if serializer.is_valid():
-        serializer.save()
         payment_instance = stripe.PaymentIntent.create(
             amount=amount,
             currency='inr',
             payment_method_types=['card'],
         )
+        serializer.save()
         # not sure if this is the payment link (didnt see another url).
         url = payment_instance['charges']['url']
         
@@ -41,10 +41,10 @@ def add_invoice(request):
         email = EmailMultiAlternatives("Payment Link", text_content, settings.EMAIL_HOST_USER, [client_email])
         email.attach_alternative(html_content, "text/html")
         try:
-            email.send() #it was working but the account was disabled my google, so mail functionality will not be working.
+            email.send() #it was working but the account was disabled my google(email functionality may not work).
         except Exception as e:
             print(e)
             
-        return Response({'success' : 'succesfully sent the email'})
+        return Response({'success' : 'email with paymentlink sent successfully'})
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
